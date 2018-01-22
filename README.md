@@ -7,11 +7,15 @@ This software detects a hung Raspberry Pi by not receiving periodic pulses on GP
 Custom ESP8266-01s based hardware is required.
 
 In reference to the Original 5.11.1b Sonoff-Tasmota sw on which this is based, here are the files moddifed/added:
+
 Added:
+
 watchdog.ino - adds most of the watchdog code.
 
 Changed:
+
 sonoff.ino - Add hooks in setup() and loop() to watchdog code
+
 webserver.ino - Add Watchdog Status page; web command and button on main page to access it.
 
 
