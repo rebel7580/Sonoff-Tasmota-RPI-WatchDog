@@ -2,6 +2,7 @@
   webserver.ino - webserver for Sonoff-Tasmota
 
   Copyright (C) 2018  Theo Arends
+  Watchdog additions Copyright (C) 2018  Ron Boston
 
   This program is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
