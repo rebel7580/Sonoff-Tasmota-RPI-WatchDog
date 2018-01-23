@@ -17,7 +17,6 @@ Added:
 Changed:
 
 * sonoff.ino - Add hooks in setup() and loop() to watchdog code
-
 * webserver.ino - Add Watchdog Status page; web command and button on main page to access it.
 
 The following settings help make the WatchDog "behave" properly:
