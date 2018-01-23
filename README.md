@@ -12,14 +12,18 @@ In reference to the Original 5.11.1b Sonoff-Tasmota sw on which this is based, h
 
 Added:
 
-watchdog.ino - adds most of the watchdog code.
+* watchdog.ino - adds most of the watchdog code.
 
 Changed:
 
-sonoff.ino - Add hooks in setup() and loop() to watchdog code
+* sonoff.ino - Add hooks in setup() and loop() to watchdog code
 
-webserver.ino - Add Watchdog Status page; web command and button on main page to access it.
+* webserver.ino - Add Watchdog Status page; web command and button on main page to access it.
 
+The following settings help make the WatchDog "behave" properly:
+
+ * ButtonTopic: Set to a topic that will be sent when the WatchDog receives a pulse from the RPI. This setting also prevents the pulse from directly toggling the state of the device. 
+ * PowerOnState: 4 - Turn relay(s) on and disable further relay control. This leaves the device permenantly in the "ON" state. Since the actual relay is on GPIO2, not GPIO12, this has no effect on the actual relay.
 
 
 
