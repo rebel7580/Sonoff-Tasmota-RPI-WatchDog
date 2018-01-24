@@ -21,6 +21,6 @@ The following settings help make the WatchDog "behave" properly:
 
 * ButtonTopic: Set to a topic that will be sent when the WatchDog receives a pulse from the RPI. This setting also prevents the pulse from directly toggling the state of the device. 
 * PowerOnState 4 - Turn relay(s) on and disable further relay control: This leaves the device permenantly in the "ON" state. Since the actual relay is on GPIO2, not GPIO12, this has no effect on the actual relay.
-* StateText3 Cycle: This is the cmnd/topic/POWER payload text sent when the "button" is "pushed" (i.e., GPIO0 being pulsed) and is usually reserved for "TOGGLE". Changed to "CYCLE" so it can be uniquely acted on by the receiver.
+* StateText3 Cycle: This is the cmnd/topic/POWER payload text sent when the "button" is "pushed" (really GPIO0 being pulsed in this case) and is usually reserved for "TOGGLE". Changed to "CYCLE" so it can be uniquely acted on by the receiver.
 
 
