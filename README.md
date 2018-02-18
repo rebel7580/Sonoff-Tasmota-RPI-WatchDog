@@ -14,7 +14,8 @@ Added:
 * watchdog.ino - Adds most of the watchdog code.
 
 Changed:
-* sonoff.ino - Add hooks in setup() and loop() to watchdog code
+* sonoff.ino - Add hooks in setup() and loop() to watchdog code,
+             - [2018-02-18]  Add power cycle command
 * webserver.ino - Add Watchdog Status page; web command and button on main page to access it.
 
 The following settings help make the WatchDog "behave" properly:
