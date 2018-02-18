@@ -31,7 +31,7 @@ int watchDogState;            // the current reading from the input pin
 int lastWatchDogState = HIGH; // the previous reading from the input pin
 // the following are unsigned longs because the time, measured in miliseconds,
 // will quickly become a bigger number than can be stored in an int.
-unsigned long watchDogDelay = 120000; // WatchDog timeout - 5 mins
+unsigned long watchDogDelay = 300000; // WatchDog timeout - 5 mins
 unsigned long lastWatchDogTime = 0;
 unsigned long lastDebounceTime = 0;
 unsigned long debounceDelay = 50;
