@@ -103,6 +103,9 @@ const char kOptionOn[] PROGMEM = "ON|" D_ON "|" D_TRUE "|" D_START "|" D_FAHRENH
 const char kOptionToggle[] PROGMEM = "TOGGLE|" D_TOGGLE "|" D_ADMIN ;
 const char kOptionBlink[] PROGMEM = "BLINK|" D_BLINK ;
 const char kOptionBlinkOff[] PROGMEM = "BLINKOFF|" D_BLINKOFF ;
+/*** WatchDog adder ***/
+const char kOptionPowerCycle[] PROGMEM = "CYCLE|Cycle" ;
+/*** End WatchDog adder ***/
 
 // Global variables
 int baudrate = APP_BAUDRATE;                // Serial interface baud rate
@@ -196,6 +199,19 @@ char mqtt_data[MESSZ + TOPSZ];              // MQTT publish buffer (MESSZ) and w
 char log_data[TOPSZ + MESSZ];               // Logging
 String web_log[MAX_LOG_LINES];              // Web log buffer
 String backlog[MAX_BACKLOG];                // Command backlog
+
+
+/*** WatchDog adder ***/
+// Defined in watchdog.ino
+extern unsigned long lastWatchDogTime;
+extern unsigned long lastDebounceTime;
+extern unsigned long lastRelayTime;
+extern unsigned long lastReconnectAttempt;
+// set pin numbers:
+extern const int relayPin = 2;    // the number of the relay pin
+extern const int watchDogPin = 0; // the number of the watchdog input pin
+/*** End WatchDog adder ***/
+
 
 /********************************************************************************************/
 
@@ -870,7 +886,11 @@ void MqttDataCallback(char* topic, byte* data, unsigned int data_len)
     if (GetCommandCode(command, sizeof(command), dataBuf, kOptionBlinkOff) >= 0) {
       payload = 4;
     }
-
+/*** WatchDog adder ***/
+    if (GetCommandCode(command, sizeof(command), dataBuf, kOptionPowerCycle) >= 0) {
+      payload = 5;
+    }
+/*** End WatchDog adder ***/
 //    snprintf_P(log_data, sizeof(log_data), PSTR("RSLT: Payload %d, Payload16 %d"), payload, payload16);
 //    AddLog(LOG_LEVEL_DEBUG);
 
@@ -903,7 +923,9 @@ void MqttDataCallback(char* topic, byte* data, unsigned int data_len)
       snprintf_P(mqtt_data, sizeof(mqtt_data), S_JSON_COMMAND_NVALUE, command, backlog_delay);
     }
     else if ((CMND_POWER == command_code) && (index > 0) && (index <= devices_present)) {
-      if ((payload < 0) || (payload > 4)) {
+/*** WatchDog adder ***/
+      if ((payload < 0) || (payload > 5)) {
+/*** End WatchDog adder ***/
         payload = 9;
       }
       ExecuteCommandPower(index, payload);
@@ -1564,6 +1586,9 @@ void ExecuteCommandPower(byte device, byte state)
 // state 2 = Toggle relay
 // state 3 = Blink relay
 // state 4 = Stop blinking relay
+/*** WatchDog adder ***/
+// state 5 = Power Cycle
+/*** End WatchDog adder ***/
 // state 6 = Relay Off and no publishPowerState
 // state 7 = Relay On and no publishPowerState
 // state 9 = Show power state
@@ -1634,6 +1659,12 @@ void ExecuteCommandPower(byte device, byte state)
     }
     return;
   }
+/*** WatchDog adder ***/
+  else if (5 == state) { // Power cycle!
+    lastWatchDogTime = 1;
+    checkWatchDog();
+  }
+/*** End WatchDog adder ***/
   if (publish_power) {
     MqttPublishPowerState(device);
   }
@@ -2622,17 +2653,6 @@ void GpioInit()
 
   XDrvInit();
 }
-
-/*** WatchDog adder ***/
-// Defined in watchdog.ino
-extern unsigned long lastWatchDogTime;
-extern unsigned long lastDebounceTime;
-extern unsigned long lastRelayTime;
-extern unsigned long lastReconnectAttempt;
-// set pin numbers:
-extern const int relayPin = 2;    // the number of the relay pin
-extern const int watchDogPin = 0; // the number of the watchdog input pin
-/*** End WatchDog adder ***/
 
 extern "C" {
 extern struct rst_info resetInfo;
