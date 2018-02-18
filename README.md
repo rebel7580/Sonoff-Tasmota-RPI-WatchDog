@@ -8,7 +8,7 @@ Originally, this was a implemented based on other simpler sw; adding the watchdo
 
 Custom ESP8266-01s based hardware is required. See https://github.com/rebel7580/Sonoff-Tasmota-RPI-WatchDog/blob/master/ESP8266%20RPI%20Watchdog%20v2%20sch.pdf
 
-In reference to the Original 5.11.1b Sonoff-Tasmota sw on which this is based, here are the files moddifed/added:
+In reference to the Original 5.11.1b Sonoff-Tasmota sw on which this is based, here are the files modified/added:
 
 Added:
 * watchdog.ino - Adds most of the watchdog code.
