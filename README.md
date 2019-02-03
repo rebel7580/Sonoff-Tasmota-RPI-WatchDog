@@ -1,5 +1,5 @@
 ## Raspberry PI WatchDog
-<b>NOTE: With the addition of Rules in newer versions of Sonoff-Tasmota software, these changes and additions to the code are no longer needed. Rules can be set up to monitor the watchdog output of the Raspberry Pi and activate the relay if there is a timeout. (Of course, the addition of watchdog status on the web page cannot be done via Rules, but that is a "convenience' feature. Forcing power cycle command is under study. See https://github.com/rebel7580/Sonoff-Tasmota-RPI-WatchDog/wiki/RPI-Watchdog-using-Standard-Tasmota-Software-and-Rules.
+<b>NOTE: With the addition of Rules in newer versions of Sonoff-Tasmota software, these changes and additions to the code are no longer needed. Rules can be set up to monitor the watchdog output of the Raspberry Pi and activate the relay if there is a timeout. (Of course, the addition of watchdog status on the web page cannot be done via Rules, but that is a "convenience' feature. Forcing power cycle command is under study. See also https://github.com/rebel7580/Sonoff-Tasmota-RPI-WatchDog/wiki/RPI-Watchdog-using-Standard-Tasmota-Software-and-Rules.
 </b>
 
 This software is based on Sonoff-Tasmota software (See https://github.com/arendst/Sonoff-Tasmota)
